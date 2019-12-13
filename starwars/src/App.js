@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import './App.css';
 
+import styled from 'styled-components'
+
+export const Header = styled.h1`
+  color: #443e3e;
+  text-shadow: 1px 1px 5px #fff;
+`
+
 const App = () => {
   const [characters, setCharacters] = useState([])
   const [character1, setCharacter1] = useState({})
@@ -16,16 +23,14 @@ const App = () => {
     }
     console.log('charArr', charsArr)
     setCharacters(charsArr)
-    // axios.get(`https://swapi.co/api/people/1`)
-    //   .then(res=>setCharacter1(res.data))
-    //   .then(e => console.log(e))
+    
   }, [])
 
   useEffect(()=>console.log('lala',characters), [characters])
 
   return (
     <div className="App">
-      <h1 className="Header">React Wars</h1>
+      <Header>React Wars</Header>
 
       {characters.map((char) => <div>{char.name}</div>)}
     </div>
