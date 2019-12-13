@@ -15,20 +15,15 @@ export const AppContainer = styled.div`
 `
 
 const App = () => {
+  
   const [characters, setCharacters] = useState([])
 
-
   useEffect(() => {
-    // const charsArr = []
-    // for (let i = 1; i < 3; i++) {
-    //   axios.get(`https://swapi.co/api/people/${i}/`)
-    //     .then((res) => charsArr.push(res.data))
-    //     .catch(e => console.log('sw err:', e))
-    // }
+    
     axios.get('https://raw.githubusercontent.com/akabab/starwars-api/0.2.1/api/all.json')
     .then(res => setCharacters(res.data))
-    // console.log('charArr', charsArr)
-    // setCharacters(charsArr)
+    .catch(e => console.log(e))
+   
   }, [])
 
   return (
