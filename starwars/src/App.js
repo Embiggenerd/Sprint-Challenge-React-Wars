@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
+import Characters from './components/Characters'
 import './App.css';
 
-const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+import styled from 'styled-components'
 
-  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+export const Header = styled.h1`
+  color: #443e3e;
+  text-shadow: 1px 1px 5px #fff;
+`
+
+export const AppContainer = styled.div`
+  text-align: center;
+`
+
+const App = () => {
+  
+  const [characters, setCharacters] = useState([])
+
+  useEffect(() => {
+    
+    axios.get('https://raw.githubusercontent.com/akabab/starwars-api/0.2.1/api/all.json')
+    .then(res => setCharacters(res.data))
+    .catch(e => console.log(e))
+   
+  }, [])
 
   return (
-    <div className="App">
-      <h1 className="Header">React Wars</h1>
-    </div>
+    <AppContainer>
+      <Header>StarWars</Header>
+      <Characters characters={characters} />
+    </AppContainer>
   );
 }
 
